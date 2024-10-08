@@ -26,11 +26,13 @@ database.connect();
 app.use(express.json());
 app.use(cookieParser());
 app.use(
-	cors({
-		origin: "http://localhost:3000",
-		credentials: true,
-	})
+  cors({
+    origin: [ process.env.PRO_REACT_URL,process.env.DEV_REACT_URL],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
 );
+
 app.use(
 	fileUpload({
 		useTempFiles: true,
@@ -60,5 +62,3 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
 	console.log(`App is listening at ${PORT}`);
 });
-
-// End of code.
